@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      body {
+        background: #f3f3f3;
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      Resize Iframe
+    </h3>
+    <script>
+      function sendPostMessageResize() {
+        const resizeEventData = {
+          height: document.body.clientWidth
+        };
+
+        let message = {
+          appKey: "test-id",
+          messageType: "iframeResize",
+          data: resizeEventData
+        };
+
+        message = JSON.stringify(message);
+        window.parent.postMessage(message, "*");
+
+        console.log("Mock page has posted message.", `Resize height: ${document.body.clientWidth}px`)
+      }
+
+      window.addEventListener("resize", sendPostMessageResize);
+    </script>
+  </body>
+</html>
