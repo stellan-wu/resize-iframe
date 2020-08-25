@@ -6,20 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Resize Iframe</title>
     <style>
-      body {
-        background: #f3f3f3;
-        border: 2px solid red;
-      }
     </style>
   </head>
   <body>
-    <h3>
-      Resize Iframe
-    </h3>
+    <div>
+      <input type="text">
+      <button onclick="sendPostMessageResize()">Set height</button>
+    </div>
     <script>
       function sendPostMessageResize() {
         const resizeEventData = {
-          height: document.body.clientWidth
+          height: document.querySelector("input").value
         };
 
         let message = {
@@ -31,10 +28,8 @@
         message = JSON.stringify(message);
         window.parent.postMessage(message, "*");
 
-        console.log("Mock page has posted message.", `Resize height: ${document.body.clientWidth}px`)
+        console.log("Mock page has posted message.", `Resize height: ${resizeEventData.height}px`)
       }
-
-      window.addEventListener("resize", sendPostMessageResize);
     </script>
   </body>
 </html>
